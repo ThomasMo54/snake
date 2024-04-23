@@ -7,6 +7,7 @@
  * The default any game object superclass.
  */
 class GameObject {
+protected:
     Vector2i position;
 
 public:
@@ -22,7 +23,7 @@ public:
      * Get the current position of this game object.
      * @return the position
      */
-    const Vector2i& getPosition() const {
+    inline const Vector2i& getPosition() const {
         return position;
     }
 };
