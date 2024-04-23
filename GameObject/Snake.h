@@ -83,7 +83,7 @@ public:
         justGrew = true;
     }
 
-    void draw(const GraphicalInterface &gui) const {
+    void draw(const GraphicalInterface &gui) const override {
         gui.drawSnake(this);
     }
 };

@@ -32,7 +32,7 @@ public:
      * Draw this game object on the screen.
      * @param gui the graphical interface
      */
-    virtual void draw(const GraphicalInterface &gui) = 0;
+    virtual void draw(const GraphicalInterface &gui) const = 0;
 };
 
 #endif //SNAKE_GAMEOBJECT_H
