@@ -2,16 +2,19 @@
 #define SNAKE_SNAKE_H
 
 #include <queue>
+#include <iterator>
 #include "GameObject.h"
+
+using namespace std;
 
 /**
  * The snake object. Handles moving and growing.
  */
 class Snake : public GameObject {
-    static const int DEFAULT_SIZE;
+    static const int DEFAULT_SIZE = 3;
 
     Vector2i direction;
-    queue<Vector2i> parts;
+    deque<Vector2i> parts;
     bool justGrew;
 
     void initialize() {
@@ -19,9 +22,9 @@ class Snake : public GameObject {
         Vector2i tailPosition = position - direction * DEFAULT_SIZE;
 
         // Add all snake's body parts starting from its tail
-        parts.push(tailPosition);
+        parts.push_front(tailPosition);
         for (int i = 0; i < DEFAULT_SIZE - 1; i++) {
-            parts.push(parts.front() + direction);
+            parts.push_front(parts.front() + direction);
         }
     }
 
@@ -45,6 +48,14 @@ public:
     }
 
     /**
+     * Get the snake's body parts position.
+     * @return the dequeue containing the positions
+     */
+    inline deque<Vector2i> getParts() const {
+        return parts;
+    }
+
+    /**
      * Move the snake toward its current direction.
      */
     void move() {
@@ -55,13 +66,13 @@ public:
         Vector2i nextHead = head + direction;
 
         // Add the next head position to the body parts
-        parts.push(nextHead);
+        parts.push_front(nextHead);
 
         // If the snake did not just grow then we remove its tail
         if (justGrew) {
             justGrew = false;
         } else {
-            parts.pop();
+            parts.pop_back();
         }
     }
 
