@@ -9,5 +9,6 @@ include_directories(${SDL2_INCLUDE_DIRS})
 add_executable(snake main.cpp
         Math/Vector2i.h
         GameObject/GameObject.h
-        GameObject/Snake.h)
+        GameObject/Snake.h
+        GameObject/Apple.h)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
