@@ -11,6 +11,16 @@
 class GraphicalInterface {
 public:
     /**
+     * Clear the screen.
+     */
+    virtual void clear() = 0;
+
+    /**
+     * Destroy the screen.
+     */
+    virtual void destroy() = 0;
+
+    /**
      * Draw a snake on the screen.
      * @param snake the snake
      */
