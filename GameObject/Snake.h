@@ -82,6 +82,10 @@ public:
     inline void grow() {
         justGrew = true;
     }
+
+    void draw(const GraphicalInterface &gui) const {
+        gui.drawSnake(this);
+    }
 };
 
 #endif //SNAKE_SNAKE_H

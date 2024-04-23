@@ -2,6 +2,7 @@
 #define SNAKE_GAMEOBJECT_H
 
 #include "../Math/Vector2i.h"
+#include "../GraphicalInterface/GraphicalInterface.h"
 
 /**
  * The default any game object superclass.
@@ -26,6 +27,12 @@ public:
     inline const Vector2i& getPosition() const {
         return position;
     }
+
+    /**
+     * Draw this game object on the screen.
+     * @param gui the graphical interface
+     */
+    virtual void draw(const GraphicalInterface &gui) = 0;
 };
 
 #endif //SNAKE_GAMEOBJECT_H
