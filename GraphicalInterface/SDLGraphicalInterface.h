@@ -40,7 +40,7 @@ public:
             throw SDLException(SDL_GetError());
         }
 
-        window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+        window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 400, 0);
         if (window == nullptr) {
             throw SDLException(SDL_GetError());
         }
@@ -65,8 +65,25 @@ public:
         SDL_Quit();
     }
 
-    void update() const override {
+    void update() override {
         SDL_RenderPresent(renderer);
+
+        SDL_Event event;
+        while (SDL_PollEvent(&event) != 0) {
+            switch (event.type) {
+                case SDL_QUIT:
+                    exit(0);
+                default:
+                    break;
+            }
+        }
+
+        // Sleep between frames to slow the game down
+        SDL_Delay(150);
+    }
+
+    bool isKeyDown(int key) const override {
+        return SDL_GetKeyboardState(nullptr)[key];
     }
 
     void drawSnake(const Snake &snake) const override {

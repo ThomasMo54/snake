@@ -1,9 +1,8 @@
 #ifndef SNAKE_GAME_H
 #define SNAKE_GAME_H
 
+#include <SDL2/SDL.h>
 #include <memory>
-#include <unistd.h>
-#include <set>
 #include <vector>
 #include <random>
 #include "../GraphicalInterface/GraphicalInterface.h"
@@ -15,7 +14,6 @@
 using namespace std;
 
 class Game {
-    static const int DELAY_BETWEEN_FRAMES = 250000; // In microseconds (= 0.25s)
     static const int WORLD_WIDTH = 40;
     static const int WORLD_HEIGHT = 20;
 
@@ -27,7 +25,7 @@ class Game {
     unique_ptr<Apple> apple;
     vector<Obstacle> obstacles;
 
-    Apple randomlySpawnApple() const {
+    void randomlySpawnApple() {
         // Initialize a vector containing all the free positions
         vector<Vector2i> freePositions;
 
@@ -35,19 +33,28 @@ class Game {
         for (int y = 0; y < WORLD_HEIGHT; y++) {
             for (int x = 0; x < WORLD_WIDTH; x++) {
                 Vector2i position = Vector2i(x, y);
+                bool free = true;
 
                 // Check if the current position is an obstacle
                 for (const auto & obstacle : obstacles) {
                     if (obstacle.getPosition() == position) {
-                        continue;
+                        free = false;
+                        break;
                     }
+                }
+                if (!free) {
+                    continue;
                 }
 
                 // Check if the current position is a snake's body part
                 for (const auto & part : snake->getParts()) {
                     if (part == position) {
-                        continue;
+                        free = false;
+                        break;
                     }
+                }
+                if (!free) {
+                    continue;
                 }
 
                 // If the current position is free then add it to the free positions vector
@@ -62,7 +69,8 @@ class Game {
         unsigned long positionIndex = dist6(rng);
         Vector2i position = freePositions[positionIndex];
 
-        return Apple(position);
+        apple.release();
+        apple = make_unique<Apple>(Apple(position));
     }
 
 public:
@@ -79,7 +87,9 @@ public:
 
         // Spawn snake in the center of the world
         this->snake = make_unique<Snake>(Snake(Vector2i(WORLD_WIDTH / 2, WORLD_HEIGHT / 2)));
-        this->apple = make_unique<Apple>(randomlySpawnApple());
+
+        // Randomly spawn an apple
+        randomlySpawnApple();
     }
 
     void start() {
@@ -87,14 +97,71 @@ public:
 
         // Start the game loop
         while (running) {
+            // Handle movement
+            if (gui->isKeyDown(SDL_SCANCODE_LEFT) && snake->getDirection() != Vector2i(1, 0)) {
+                snake->setDirection(Vector2i(-1, 0));
+            } else if (gui->isKeyDown(SDL_SCANCODE_RIGHT) && snake->getDirection() != Vector2i(-1, 0)) {
+                snake->setDirection(Vector2i(1, 0));
+            } else if (gui->isKeyDown(SDL_SCANCODE_UP) && snake->getDirection() != Vector2i(0, 1)) {
+                snake->setDirection(Vector2i(0, -1));
+            } else if (gui->isKeyDown(SDL_SCANCODE_DOWN) && snake->getDirection() != Vector2i(0, -1)) {
+                snake->setDirection(Vector2i(0, 1));
+            }
+            snake->move();
+
+            // Spawn snake at the opposite of the world if it hits one edge
+            Vector2i head = snake->getHead();
+            if (head.x >= WORLD_WIDTH) {
+                snake->setHead(Vector2i(0, head.y));
+            } else if (head.x < 0) {
+                snake->setHead(Vector2i(WORLD_WIDTH - 1, head.y));
+            } else if (head.y >= WORLD_HEIGHT) {
+                snake->setHead(Vector2i(head.x, 0));
+            } else if (head.y < 0){
+                snake->setHead(Vector2i(head.x, WORLD_HEIGHT - 1));
+            }
+
+            // Check if the snake is eating an apple
+            if (snake->getHead() == apple->getPosition()) {
+                applesEaten++;
+                snake->grow();
+                randomlySpawnApple();
+            }
+
+            // Check if snake is hitting an obstacle
+            for (const auto &obstacle : obstacles) {
+                if (snake->getHead() == obstacle.getPosition()) {
+                    stop();
+                    return;
+                }
+            }
+
+            // Check if snake is hitting himself
+            for (int i = 1; i < snake->getParts().size(); i++) {
+                if (snake->getHead() == snake->getParts()[i]) {
+                    stop();
+                    return;
+                }
+            }
+
+            steps++;
+
             // Clear screen
             gui->clear();
 
+            // Draw apple
+            apple->draw(*gui);
+
+            // Draw obstacles
+            for (const auto &obstacle : obstacles) {
+                obstacle.draw(*gui);
+            }
+
+            // Draw snake
+            snake->draw(*gui);
+
             // Update screen
             gui->update();
-
-            // Sleep between iterations of the loop to make the game run slower
-            usleep(DELAY_BETWEEN_FRAMES);
         }
     }
 

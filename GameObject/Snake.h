@@ -39,6 +39,19 @@ public:
         initialize();
     }
 
+    inline const Vector2i& getHead() const {
+        return parts.front();
+    }
+
+    inline void setHead(const Vector2i &head) {
+        parts.pop_front();
+        parts.push_front(head);
+    }
+
+    inline const Vector2i& getDirection() const {
+        return direction;
+    }
+
     /**
      * Set the current direction the snake is going to.
      * @param direction the direction
