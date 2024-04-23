@@ -84,7 +84,7 @@ public:
     }
 
     void draw(const GraphicalInterface &gui) const override {
-        gui.drawSnake(this);
+        gui.drawSnake(*this);
     }
 };
 

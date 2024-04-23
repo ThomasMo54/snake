@@ -13,5 +13,7 @@ add_executable(snake main.cpp
         GameObject/Apple.h
         GameObject/Obstacle.h
         GraphicalInterface/GraphicalInterface.h
-        Game/Game.h)
+        Game/Game.h
+        GraphicalInterface/SDLGraphicalInterface.h
+        Exception/SDLException.h)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})

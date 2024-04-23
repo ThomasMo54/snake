@@ -8,7 +8,7 @@ public:
     explicit Obstacle(const Vector2i &position): GameObject(position) {}
 
     void draw(const GraphicalInterface &gui) const override {
-        gui.drawObstacle(this);
+        gui.drawObstacle(*this);
     }
 };
 
