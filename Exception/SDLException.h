@@ -4,14 +4,12 @@
 #include <string>
 #include <utility>
 
-using namespace std;
-
-class SDLException : public exception {
-    string message;
+class SDLException : public std::exception {
+    std::string message;
 public:
-    explicit SDLException(string message): message(std::move(message)) {}
+    explicit SDLException(std::string message): message(std::move(message)) {}
 
-    inline const string getMessage() const {
+    inline const std::string getMessage() const {
         return message;
     }
 };

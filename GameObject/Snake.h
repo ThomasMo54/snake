@@ -5,8 +5,6 @@
 #include <iterator>
 #include "GameObject.h"
 
-using namespace std;
-
 /**
  * The snake object. Handles moving and growing.
  */
@@ -14,7 +12,7 @@ class Snake : public GameObject {
     static const int DEFAULT_SIZE = 3;
 
     Vector2i direction;
-    deque<Vector2i> parts;
+    std::deque<Vector2i> parts;
     bool justGrew;
 
     void initialize() {
@@ -64,7 +62,7 @@ public:
      * Get the snake's body parts position.
      * @return the dequeue containing the positions
      */
-    inline deque<Vector2i> getParts() const {
+    inline std::deque<Vector2i> getParts() const {
         return parts;
     }
 

@@ -11,8 +11,6 @@
 #include "../GameObject/Apple.h"
 #include "../GameObject/Obstacle.h"
 
-using namespace std;
-
 class Game {
     static const int WORLD_WIDTH = 40;
     static const int WORLD_HEIGHT = 20;
@@ -20,14 +18,14 @@ class Game {
     int applesEaten;
     int steps;
     bool running;
-    unique_ptr<GraphicalInterface> gui;
-    unique_ptr<Snake> snake;
-    unique_ptr<Apple> apple;
-    vector<Obstacle> obstacles;
+    std::unique_ptr<GraphicalInterface> gui;
+    std::unique_ptr<Snake> snake;
+    std::unique_ptr<Apple> apple;
+    std::vector<Obstacle> obstacles;
 
     void randomlySpawnApple() {
         // Initialize a vector containing all the free positions
-        vector<Vector2i> freePositions;
+        std::vector<Vector2i> freePositions;
 
         // Iterate over all the world's positions to find every free positions
         for (int y = 0; y < WORLD_HEIGHT; y++) {
@@ -70,11 +68,11 @@ class Game {
         Vector2i position = freePositions[positionIndex];
 
         apple.release();
-        apple = make_unique<Apple>(Apple(position));
+        apple = std::make_unique<Apple>(Apple(position));
     }
 
 public:
-    explicit Game(unique_ptr<GraphicalInterface> &gui) {
+    explicit Game(std::unique_ptr<GraphicalInterface> &gui) {
         applesEaten = 0;
         steps = 0;
         running = false;
@@ -86,7 +84,7 @@ public:
         }
 
         // Spawn snake in the center of the world
-        this->snake = make_unique<Snake>(Snake(Vector2i(WORLD_WIDTH / 2, WORLD_HEIGHT / 2)));
+        this->snake = std::make_unique<Snake>(Snake(Vector2i(WORLD_WIDTH / 2, WORLD_HEIGHT / 2)));
 
         // Randomly spawn an apple
         randomlySpawnApple();

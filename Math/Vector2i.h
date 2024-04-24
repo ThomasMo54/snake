@@ -4,8 +4,6 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
-
 /**
  * A minimalistic 2D vector class with integer components.
  */
@@ -84,8 +82,8 @@ public:
         return x == v.x && y == v.y;
     }
 
-    explicit operator string() const {
-        ostringstream oss;
+    explicit operator std::string() const {
+        std::ostringstream oss;
         oss << "(" << x << ", " << y << ")";
         return oss.str();
     }
