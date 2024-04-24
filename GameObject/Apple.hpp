@@ -1,7 +1,7 @@
-#ifndef SNAKE_APPLE_H
-#define SNAKE_APPLE_H
+#ifndef SNAKE_APPLE_HPP
+#define SNAKE_APPLE_HPP
 
-#include "GameObject.h"
+#include "GameObject.hpp"
 
 class Apple : public GameObject {
 public:
@@ -12,4 +12,4 @@ public:
     }
 };
 
-#endif //SNAKE_APPLE_H
+#endif //SNAKE_APPLE_HPP

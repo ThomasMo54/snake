@@ -1,8 +1,8 @@
-#ifndef SNAKE_GAMEOBJECT_H
-#define SNAKE_GAMEOBJECT_H
+#ifndef SNAKE_GAMEOBJECT_HPP
+#define SNAKE_GAMEOBJECT_HPP
 
-#include "Math/Vector2i.h"
-#include "GraphicalInterface/GraphicalInterface.h"
+#include "Math/Vector2i.hpp"
+#include "GraphicalInterface/GraphicalInterface.hpp"
 
 /**
  * The default any game object superclass.
@@ -35,4 +35,4 @@ public:
     virtual void draw(const GraphicalInterface &gui) const = 0;
 };
 
-#endif //SNAKE_GAMEOBJECT_H
+#endif //SNAKE_GAMEOBJECT_HPP

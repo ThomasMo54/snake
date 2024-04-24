@@ -1,5 +1,5 @@
-#ifndef SNAKE_SDLEXCEPTION_H
-#define SNAKE_SDLEXCEPTION_H
+#ifndef SNAKE_SDLEXCEPTION_HPP
+#define SNAKE_SDLEXCEPTION_HPP
 
 #include <string>
 #include <utility>
@@ -14,4 +14,4 @@ public:
     }
 };
 
-#endif //SNAKE_SDLEXCEPTION_H
+#endif //SNAKE_SDLEXCEPTION_HPP

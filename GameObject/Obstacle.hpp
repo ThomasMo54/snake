@@ -1,7 +1,7 @@
-#ifndef SNAKE_OBSTACLE_H
-#define SNAKE_OBSTACLE_H
+#ifndef SNAKE_OBSTACLE_HPP
+#define SNAKE_OBSTACLE_HPP
 
-#include "GameObject.h"
+#include "GameObject.hpp"
 
 class Obstacle : public GameObject {
 public:
@@ -12,4 +12,4 @@ public:
     }
 };
 
-#endif //SNAKE_OBSTACLE_H
+#endif //SNAKE_OBSTACLE_HPP

@@ -1,31 +1,14 @@
-#ifndef SNAKE_SNAKE_H
-#define SNAKE_SNAKE_H
+#ifndef SNAKE_SNAKE_HPP
+#define SNAKE_SNAKE_HPP
 
 #include <queue>
 #include <iterator>
-#include "GameObject.h"
+#include "GameObject.hpp"
 
 /**
  * The snake object. Handles moving and growing.
  */
 class Snake : public GameObject {
-    static const int DEFAULT_SIZE = 3;
-
-    Vector2i direction;
-    std::deque<Vector2i> parts;
-    bool justGrew;
-
-    void initialize() {
-        // The position of the tail
-        Vector2i tailPosition = position - direction * DEFAULT_SIZE;
-
-        // Add all snake's body parts starting from its tail
-        parts.push_front(tailPosition);
-        for (int i = 0; i < DEFAULT_SIZE - 1; i++) {
-            parts.push_front(parts.front() + direction);
-        }
-    }
-
 public:
     /**
      * Create a snake giving its head's position.
@@ -69,34 +52,25 @@ public:
     /**
      * Move the snake toward its current direction.
      */
-    void move() {
-        // Retreive the snake's head position
-        Vector2i head = parts.front();
-
-        // Compute the next head position
-        Vector2i nextHead = head + direction;
-
-        // Add the next head position to the body parts
-        parts.push_front(nextHead);
-
-        // If the snake did not just grow then we remove its tail
-        if (justGrew) {
-            justGrew = false;
-        } else {
-            parts.pop_back();
-        }
-    }
+    void move();
 
     /**
      * Add one body part to the snake.
      */
-    inline void grow() {
-        justGrew = true;
-    }
+    void grow();
 
     void draw(const GraphicalInterface &gui) const override {
         gui.drawSnake(*this);
     }
+
+private:
+    static const int DEFAULT_SIZE = 3;
+
+    Vector2i direction;
+    std::deque<Vector2i> parts;
+    bool justGrew;
+
+    void initialize();
 };
 
-#endif //SNAKE_SNAKE_H
+#endif //SNAKE_SNAKE_HPP

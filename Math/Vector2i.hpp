@@ -1,5 +1,5 @@
-#ifndef SNAKE_VECTOR2I_H
-#define SNAKE_VECTOR2I_H
+#ifndef SNAKE_VECTOR2I_HPP
+#define SNAKE_VECTOR2I_HPP
 
 #include <string>
 #include <sstream>
@@ -38,55 +38,55 @@ public:
         y = 0;
     }
 
-    Vector2i operator + (const Vector2i &v) const {
+    inline Vector2i operator + (const Vector2i &v) const {
         return Vector2i(x + v.x, y + v.y);
     }
 
-    const Vector2i& operator += (const Vector2i &v) {
+    inline const Vector2i& operator += (const Vector2i &v) {
         x += v.x;
         y += v.y;
         return *this;
     }
 
-    Vector2i operator - (const Vector2i &v) const {
+    inline Vector2i operator - (const Vector2i &v) const {
         return Vector2i(x - v.x, y - v.y);
     }
 
-    const Vector2i& operator -= (const Vector2i &v) {
+    inline const Vector2i& operator -= (const Vector2i &v) {
         x -= v.x;
         y -= v.y;
         return *this;
     }
 
-    Vector2i operator * (int i) const {
+    inline Vector2i operator * (int i) const {
         return Vector2i(x * i, y * i);
     }
 
-    const Vector2i& operator *= (int i) {
+    inline const Vector2i& operator *= (int i) {
         x *= i;
         y *= i;
         return *this;
     }
 
-    Vector2i operator / (int i) const {
+    inline Vector2i operator / (int i) const {
         return Vector2i(x / i, y / i);
     }
 
-    const Vector2i& operator /= (int i) {
+    inline const Vector2i& operator /= (int i) {
         x /= i;
         y /= i;
         return *this;
     }
 
-    bool operator == (const Vector2i &v) const {
+    inline bool operator == (const Vector2i &v) const {
         return x == v.x && y == v.y;
     }
 
-    explicit operator std::string() const {
+    inline explicit operator std::string() const {
         std::ostringstream oss;
         oss << "(" << x << ", " << y << ")";
         return oss.str();
     }
 };
 
-#endif //SNAKE_VECTOR2I_H
+#endif //SNAKE_VECTOR2I_HPP

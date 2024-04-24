@@ -1,6 +1,6 @@
 #include <iostream>
-#include "GraphicalInterface/SDLGraphicalInterface.h"
-#include "Game/Game.h"
+#include "GraphicalInterface/SDLGraphicalInterface.hpp"
+#include "Game/Game.hpp"
 
 int main() {
     try {

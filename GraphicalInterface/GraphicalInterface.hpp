@@ -1,5 +1,5 @@
-#ifndef SNAKE_GRAPHICALINTERFACE_H
-#define SNAKE_GRAPHICALINTERFACE_H
+#ifndef SNAKE_GRAPHICALINTERFACE_HPP
+#define SNAKE_GRAPHICALINTERFACE_HPP
 
 class Snake;
 class Apple;
@@ -51,4 +51,4 @@ public:
     virtual void drawObstacle(const Obstacle &obstacle) const = 0;
 };
 
-#endif //SNAKE_GRAPHICALINTERFACE_H
+#endif //SNAKE_GRAPHICALINTERFACE_HPP
