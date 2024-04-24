@@ -1,8 +1,8 @@
 #ifndef SNAKE_GAMEOBJECT_H
 #define SNAKE_GAMEOBJECT_H
 
-#include "../Math/Vector2i.h"
-#include "../GraphicalInterface/GraphicalInterface.h"
+#include "Math/Vector2i.h"
+#include "GraphicalInterface/GraphicalInterface.h"
 
 /**
  * The default any game object superclass.

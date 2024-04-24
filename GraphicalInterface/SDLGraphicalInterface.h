@@ -3,11 +3,11 @@
 
 #include <SDL2/SDL.h>
 #include "GraphicalInterface.h"
-#include "../Exception/SDLException.h"
-#include "../Math/Vector2i.h"
-#include "../GameObject/Snake.h"
-#include "../GameObject/Apple.h"
-#include "../GameObject/Obstacle.h"
+#include "Exception/SDLException.h"
+#include "Math/Vector2i.h"
+#include "GameObject/Snake.h"
+#include "GameObject/Apple.h"
+#include "GameObject/Obstacle.h"
 
 class SDLGraphicalInterface : public GraphicalInterface {
     static const int SQUARE_SIZE = 20;

@@ -5,11 +5,11 @@
 #include <memory>
 #include <vector>
 #include <random>
-#include "../GraphicalInterface/GraphicalInterface.h"
-#include "../Math/Vector2i.h"
-#include "../GameObject/Snake.h"
-#include "../GameObject/Apple.h"
-#include "../GameObject/Obstacle.h"
+#include "GraphicalInterface/GraphicalInterface.h"
+#include "Math/Vector2i.h"
+#include "GameObject/Snake.h"
+#include "GameObject/Apple.h"
+#include "GameObject/Obstacle.h"
 
 class Game {
     static const int WORLD_WIDTH = 40;
