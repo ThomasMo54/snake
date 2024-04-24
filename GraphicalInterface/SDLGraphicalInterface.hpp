@@ -23,10 +23,6 @@ public:
 
     void drawObstacle(const Obstacle &obstacle) const override;
 
-    inline bool isKeyDown(int key) const override {
-        return SDL_GetKeyboardState(nullptr)[key];
-    }
-
 private:
     static const int SQUARE_SIZE = 20;
 

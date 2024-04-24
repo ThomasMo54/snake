@@ -18,5 +18,8 @@ add_executable(snake main.cpp
         Exception/SDLException.hpp
         Game/Game.cpp
         GraphicalInterface/SDLGraphicalInterface.cpp
-        GameObject/Snake.cpp)
+        GameObject/Snake.cpp
+        Input/InputManager.hpp
+        Input/SDLInputManager.hpp
+)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})

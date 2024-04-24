@@ -1,5 +1,6 @@
 #include <random>
 #include "Game.hpp"
+#include "Input/SDLInputManager.hpp"
 #include "Math/Vector2i.hpp"
 
 std::random_device dev;
@@ -9,6 +10,7 @@ Game::Game(std::unique_ptr<GraphicalInterface> &gui) {
     applesEaten = 0;
     steps = 0;
     running = false;
+    inputManager = std::make_unique<SDLInputManager>();
     this->gui = std::move(gui);
 
     // Add some obstacles
@@ -29,13 +31,13 @@ void Game::start() {
     // Start the game loop
     while (running) {
         // Handle movement
-        if (gui->isKeyDown(SDL_SCANCODE_LEFT) && snake->getDirection() != Vector2i(1, 0)) {
+        if (inputManager->isKeyDown(SDL_SCANCODE_LEFT) && snake->getDirection() != Vector2i(1, 0)) {
             snake->setDirection(Vector2i(-1, 0));
-        } else if (gui->isKeyDown(SDL_SCANCODE_RIGHT) && snake->getDirection() != Vector2i(-1, 0)) {
+        } else if (inputManager->isKeyDown(SDL_SCANCODE_RIGHT) && snake->getDirection() != Vector2i(-1, 0)) {
             snake->setDirection(Vector2i(1, 0));
-        } else if (gui->isKeyDown(SDL_SCANCODE_UP) && snake->getDirection() != Vector2i(0, 1)) {
+        } else if (inputManager->isKeyDown(SDL_SCANCODE_UP) && snake->getDirection() != Vector2i(0, 1)) {
             snake->setDirection(Vector2i(0, -1));
-        } else if (gui->isKeyDown(SDL_SCANCODE_DOWN) && snake->getDirection() != Vector2i(0, -1)) {
+        } else if (inputManager->isKeyDown(SDL_SCANCODE_DOWN) && snake->getDirection() != Vector2i(0, -1)) {
             snake->setDirection(Vector2i(0, 1));
         }
         snake->move();

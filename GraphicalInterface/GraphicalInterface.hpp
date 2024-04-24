@@ -26,13 +26,6 @@ public:
     virtual void update() = 0;
 
     /**
-     * Check if the given key is currently pressed or not
-     * @param key the key code
-     * @return true if pressed, false otherwise
-     */
-    virtual bool isKeyDown(int key) const = 0;
-
-    /**
      * Draw a snake on the screen.
      * @param snake the snake
      */

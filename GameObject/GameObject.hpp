@@ -8,9 +8,6 @@
  * The default any game object superclass.
  */
 class GameObject {
-protected:
-    Vector2i position;
-
 public:
     /**
      * Create a game object by giving its initial position.
@@ -33,6 +30,9 @@ public:
      * @param gui the graphical interface
      */
     virtual void draw(const GraphicalInterface &gui) const = 0;
+
+protected:
+    Vector2i position;
 };
 
 #endif //SNAKE_GAMEOBJECT_HPP

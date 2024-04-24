@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <memory>
 #include <vector>
+#include "Input/InputManager.hpp"
 #include "GraphicalInterface/GraphicalInterface.hpp"
 #include "GameObject/Snake.hpp"
 #include "GameObject/Apple.hpp"
@@ -34,6 +35,7 @@ private:
     int applesEaten;
     int steps;
     bool running;
+    std::unique_ptr<InputManager> inputManager;
     std::unique_ptr<GraphicalInterface> gui;
     std::unique_ptr<Snake> snake;
     std::unique_ptr<Apple> apple;
