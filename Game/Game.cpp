@@ -1,7 +1,11 @@
 #include <random>
+#include <iostream>
 #include "Game.hpp"
 #include "Input/SDLInputManager.hpp"
 #include "Math/Vector2i.hpp"
+#include "GraphicalInterface/Drawer/SDLAppleDrawer.hpp"
+#include "GraphicalInterface/Drawer/SDLSnakeDrawer.hpp"
+#include "GraphicalInterface/Drawer/SDLObstacleDrawer.hpp"
 
 std::random_device dev;
 std::mt19937 rng(dev());
@@ -23,6 +27,12 @@ Game::Game(std::unique_ptr<GraphicalInterface> &gui) {
 
     // Randomly spawn an apple
     randomlySpawnApple();
+
+    this->gui->addObject(new SDLAppleDrawer(apple));
+    for (const auto obstacle : obstacles) {
+        this->gui->addObject(new SDLObstacleDrawer(std::make_shared<Obstacle>(obstacle)));
+    }
+    this->gui->addObject(new SDLSnakeDrawer(snake));
 }
 
 void Game::start() {
@@ -79,22 +89,8 @@ void Game::start() {
 
         steps++;
 
-        // Clear screen
-        gui->clear();
-
-        // Draw apple
-        apple->draw(*gui);
-
-        // Draw obstacles
-        for (const auto &obstacle : obstacles) {
-            obstacle.draw(*gui);
-        }
-
-        // Draw snake
-        snake->draw(*gui);
-
         // Update screen
-        gui->update();
+        gui->drawObjects();
     }
 }
 
@@ -145,6 +141,9 @@ void Game::randomlySpawnApple() {
     unsigned long positionIndex = dist6(rng);
     Vector2i position = freePositions[positionIndex];
 
-    apple.release();
-    apple = std::make_unique<Apple>(Apple(position));
+    if (apple != nullptr) {
+        *apple = Apple(position);
+    } else {
+        apple = std::make_shared<Apple>(Apple(position));
+    }
 }

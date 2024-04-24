@@ -25,12 +25,6 @@ public:
         return position;
     }
 
-    /**
-     * Draw this game object on the screen.
-     * @param gui the graphical interface
-     */
-    virtual void draw(const GraphicalInterface &gui) const = 0;
-
 protected:
     Vector2i position;
 };

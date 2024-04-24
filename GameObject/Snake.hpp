@@ -59,10 +59,6 @@ public:
      */
     void grow();
 
-    void draw(const GraphicalInterface &gui) const override {
-        gui.drawSnake(*this);
-    }
-
 private:
     static const int DEFAULT_SIZE = 3;
 

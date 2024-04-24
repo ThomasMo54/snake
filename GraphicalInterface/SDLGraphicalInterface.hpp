@@ -2,10 +2,12 @@
 #define SNAKE_SDLGRAPHICALINTERFACE_HPP
 
 #include <SDL2/SDL.h>
+#include <list>
 #include "GraphicalInterface.hpp"
 #include "GameObject/Snake.hpp"
 #include "GameObject/Apple.hpp"
 #include "GameObject/Obstacle.hpp"
+#include "GraphicalInterface/Drawer/SDLObjectDrawer.hpp"
 
 class SDLGraphicalInterface : public GraphicalInterface {
 public:
@@ -15,21 +17,14 @@ public:
 
     void destroy() override;
 
-    void update() override;
+    void drawObjects() const override;
 
-    void drawSnake(const Snake &snake) const override;
-
-    void drawApple(const Apple &apple) const override;
-
-    void drawObstacle(const Obstacle &obstacle) const override;
+    void addObject(ObjectDrawer *objectDrawer) override;
 
 private:
-    static const int SQUARE_SIZE = 20;
-
     SDL_Window *window;
     SDL_Renderer *renderer;
-
-    void drawSquare(int x, int y, int size, int r, int g, int b, bool fill) const;
+    std::list<SDLObjectDrawer*> objects;
 };
 
 #endif //SNAKE_SDLGRAPHICALINTERFACE_HPP

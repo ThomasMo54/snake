@@ -12,6 +12,8 @@
 
 class Game {
 public:
+    static const int SQUARE_SIZE = 20;
+
     /**
      * Create a new game by giving the graphical interface that will be used
      * @param gui the graphical interface
@@ -37,8 +39,8 @@ private:
     bool running;
     std::unique_ptr<InputManager> inputManager;
     std::unique_ptr<GraphicalInterface> gui;
-    std::unique_ptr<Snake> snake;
-    std::unique_ptr<Apple> apple;
+    std::shared_ptr<Snake> snake;
+    std::shared_ptr<Apple> apple;
     std::vector<Obstacle> obstacles;
 
     void randomlySpawnApple();

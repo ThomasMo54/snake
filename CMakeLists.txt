@@ -21,5 +21,14 @@ add_executable(snake main.cpp
         GameObject/Snake.cpp
         Input/InputManager.hpp
         Input/SDLInputManager.hpp
+        GraphicalInterface/Drawer/ObjectDrawer.hpp
+        GraphicalInterface/Drawer/SDLSnakeDrawer.hpp
+        GraphicalInterface/Drawer/SDLSnakeDrawer.cpp
+        GraphicalInterface/Drawer/SDLObjectDrawer.hpp
+        GraphicalInterface/Drawer/SDLObjectDrawer.cpp
+        GraphicalInterface/Drawer/SDLAppleDrawer.cpp
+        GraphicalInterface/Drawer/SDLAppleDrawer.hpp
+        GraphicalInterface/Drawer/SDLObstacleDrawer.cpp
+        GraphicalInterface/Drawer/SDLObstacleDrawer.hpp
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
