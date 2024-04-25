@@ -4,6 +4,7 @@
 #include <queue>
 #include <iterator>
 #include "GameObject.hpp"
+#include "Game/World.hpp"
 
 /**
  * The snake object. Handles moving and growing.
@@ -14,8 +15,9 @@ public:
      * Create a snake giving its head's position.
      * @param position the head's position
      */
-    explicit Snake(const Vector2i &position): GameObject(position) {
-        direction = Vector2i(1, 0);
+    explicit Snake(World *world): GameObject(position) {
+        this->world = std::make_shared<World>(*world);
+        currentDirection = Vector2i(1, 0);
         justGrew = false;
         initialize();
     }
@@ -30,15 +32,15 @@ public:
     }
 
     inline const Vector2i& getDirection() const {
-        return direction;
+        return currentDirection;
     }
 
     /**
-     * Set the current direction the snake is going to.
-     * @param direction the direction
+     * Set the current currentDirection the snake is going to.
+     * @param direction the currentDirection
      */
     inline void setDirection(const Vector2i &direction) {
-        this->direction = direction;
+        this->currentDirection = direction;
     }
 
     /**
@@ -50,19 +52,31 @@ public:
     }
 
     /**
-     * Move the snake toward its current direction.
+     * Check if the snake has a body part at the given position
+     * @param position the position
+     * @return true if has a body part at the position, false otherwise
      */
-    void move();
+    inline bool hasPartInPosition(const Vector2i &position) const {
+        for (const auto &part : parts)
+            if (part == position) return true;
+        return false;
+    }
 
     /**
-     * Add one body part to the snake.
+     * Move the snake toward the given direction.
+     */
+    void move(const Vector2i &direction);
+
+    /**
+     * Make the snake grow.
      */
     void grow();
 
 private:
     static const int DEFAULT_SIZE = 3;
 
-    Vector2i direction;
+    std::shared_ptr<World> world;
+    Vector2i currentDirection;
     std::deque<Vector2i> parts;
     bool justGrew;
 

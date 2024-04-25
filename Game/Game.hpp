@@ -3,12 +3,11 @@
 
 #include <SDL2/SDL.h>
 #include <memory>
-#include <vector>
+#include <map>
 #include "Input/InputManager.hpp"
 #include "GraphicalInterface/GraphicalInterface.hpp"
-#include "GameObject/Snake.hpp"
-#include "GameObject/Apple.hpp"
-#include "GameObject/Obstacle.hpp"
+#include "World.hpp"
+#include "Input/Control/Control.hpp"
 
 class Game {
 public:
@@ -30,6 +29,12 @@ public:
      */
     void stop();
 
+    /**
+     * Add a drawable object to the game
+     * @param objectDrawer the drawable object
+     */
+    void addObject(ObjectDrawer *objectDrawer);
+
 private:
     static const int WORLD_WIDTH = 40;
     static const int WORLD_HEIGHT = 20;
@@ -37,13 +42,10 @@ private:
     int applesEaten;
     int steps;
     bool running;
+    std::map<Input, Control*> inputs;
     std::unique_ptr<InputManager> inputManager;
     std::unique_ptr<GraphicalInterface> gui;
-    std::shared_ptr<Snake> snake;
-    std::shared_ptr<Apple> apple;
-    std::vector<Obstacle> obstacles;
-
-    void randomlySpawnApple();
+    std::shared_ptr<World> world;
 };
 
 #endif //SNAKE_GAME_HPP
