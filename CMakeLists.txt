@@ -34,10 +34,5 @@ add_executable(snake main.cpp
         Game/World.cpp
         GameObject/Obstacles.hpp
         Input/Input.hpp
-        Input/Control/Control.hpp
-        Input/Control/UpControl.h
-        Input/Control/RightControl.h
-        Input/Control/LeftControl.h
-        Input/Control/DownControl.h
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
