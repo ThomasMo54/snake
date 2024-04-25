@@ -2,7 +2,6 @@
 #define SNAKE_GAMEOBJECT_HPP
 
 #include "Math/Vector2i.hpp"
-#include "GraphicalInterface/GraphicalInterface.hpp"
 
 /**
  * The default any game object superclass.
@@ -24,6 +23,13 @@ public:
     inline const Vector2i& getPosition() const {
         return position;
     }
+
+    /**
+     * Check if the given position is in collision with this object.
+     * @param position the position
+     * @return true if there is a collision, false otherwise
+     */
+    virtual bool collision(const Vector2i &position) const = 0;
 
 protected:
     Vector2i position;

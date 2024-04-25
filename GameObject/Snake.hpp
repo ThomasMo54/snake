@@ -4,7 +4,7 @@
 #include <queue>
 #include <iterator>
 #include "GameObject.hpp"
-#include "Game/World.hpp"
+#include "Input/Input.hpp"
 
 /**
  * The snake object. Handles moving and growing.
@@ -15,32 +15,19 @@ public:
      * Create a snake giving its head's position.
      * @param position the head's position
      */
-    explicit Snake(World *world): GameObject(position) {
-        this->world = std::make_shared<World>(*world);
+    explicit Snake(const Vector2i &position): GameObject(position) {
         currentDirection = Vector2i(1, 0);
         justGrew = false;
         initialize();
     }
 
+    inline void setWorldSize(int width, int height) {
+        this->worldWidth = width;
+        this->worldHeight = height;
+    }
+
     inline const Vector2i& getHead() const {
         return parts.front();
-    }
-
-    inline void setHead(const Vector2i &head) {
-        parts.pop_front();
-        parts.push_front(head);
-    }
-
-    inline const Vector2i& getDirection() const {
-        return currentDirection;
-    }
-
-    /**
-     * Set the current currentDirection the snake is going to.
-     * @param direction the currentDirection
-     */
-    inline void setDirection(const Vector2i &direction) {
-        this->currentDirection = direction;
     }
 
     /**
@@ -51,21 +38,12 @@ public:
         return parts;
     }
 
-    /**
-     * Check if the snake has a body part at the given position
-     * @param position the position
-     * @return true if has a body part at the position, false otherwise
-     */
-    inline bool hasPartInPosition(const Vector2i &position) const {
-        for (const auto &part : parts)
-            if (part == position) return true;
-        return false;
-    }
+    bool collision(const Vector2i &position) const override;
 
     /**
-     * Move the snake toward the given direction.
+     * Move the snake toward the direction given by the input.
      */
-    void move(const Vector2i &direction);
+    void move(Input input);
 
     /**
      * Make the snake grow.
@@ -75,7 +53,7 @@ public:
 private:
     static const int DEFAULT_SIZE = 3;
 
-    std::shared_ptr<World> world;
+    int worldWidth, worldHeight;
     Vector2i currentDirection;
     std::deque<Vector2i> parts;
     bool justGrew;

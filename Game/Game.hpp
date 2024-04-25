@@ -7,7 +7,6 @@
 #include "Input/InputManager.hpp"
 #include "GraphicalInterface/GraphicalInterface.hpp"
 #include "World.hpp"
-#include "Input/Control/Control.hpp"
 
 class Game {
 public:
@@ -29,12 +28,6 @@ public:
      */
     void stop();
 
-    /**
-     * Add a drawable object to the game
-     * @param objectDrawer the drawable object
-     */
-    void addObject(ObjectDrawer *objectDrawer);
-
 private:
     static const int WORLD_WIDTH = 40;
     static const int WORLD_HEIGHT = 20;
@@ -42,10 +35,12 @@ private:
     int applesEaten;
     int steps;
     bool running;
-    std::map<Input, Control*> inputs;
     std::unique_ptr<InputManager> inputManager;
     std::unique_ptr<GraphicalInterface> gui;
     std::shared_ptr<World> world;
+    std::shared_ptr<Snake> snake;
+    std::shared_ptr<Apple> apple;
+    std::shared_ptr<Obstacles> obstacles;
 };
 
 #endif //SNAKE_GAME_HPP

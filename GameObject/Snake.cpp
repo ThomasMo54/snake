@@ -11,31 +11,39 @@ void Snake::initialize() {
     }
 }
 
-void Snake::move(const Vector2i &direction) {
-    // Change current direction
-    if (direction != currentDirection * -1) {
-        currentDirection = direction;
+bool Snake::collision(const Vector2i &position) const {
+    for (int i = 1; i < parts.size(); i++) {
+        if (parts[i] == position) return true;
+    }
+    return false;
+}
+
+void Snake::move(Input input) {
+    // Change current direction if possible
+    if (input == Input::UP && currentDirection != Vector2i(0, 1)) {
+        currentDirection = Vector2i(0, -1);
+    } else if (input == Input::DOWN && currentDirection != Vector2i(0, -1)) {
+        currentDirection = Vector2i(0, 1);
+    } else if (input == Input::LEFT && currentDirection != Vector2i(1, 0)) {
+        currentDirection = Vector2i(-1, 0);
+    } else if (input == Input::RIGHT && currentDirection != Vector2i(-1, 0)) {
+        currentDirection = Vector2i(1, 0);
     }
 
     // Retreive the snake's head position
     Vector2i head = parts.front();
 
     // Compute the next head position
-    Vector2i nextHead = head + direction;
-
-    // Check if it collides an obstacle
-    if (!world->isFreePosition(nextHead)) {
-        exit(0);
-    }
+    Vector2i nextHead = head + currentDirection;
 
     // Check if snake reached a world edge
     if (nextHead.x < 0) {
-        nextHead.x = world->getWidth() - 1;
-    } else if (nextHead.x >= world->getWidth()) {
+        nextHead.x = worldWidth - 1;
+    } else if (nextHead.x >= worldWidth) {
         nextHead.x = 0;
     } else if (nextHead.y < 0) {
-        nextHead.y = world->getHeight() - 1;
-    } else if (nextHead.y >= world->getHeight()) {
+        nextHead.y = worldHeight - 1;
+    } else if (nextHead.y >= worldHeight) {
         nextHead.y = 0;
     }
 
@@ -47,12 +55,6 @@ void Snake::move(const Vector2i &direction) {
         justGrew = false;
     } else {
         parts.pop_back();
-    }
-
-    // If snake is now on an apple then make it grow
-    if (world->isApple(nextHead)) {
-        grow();
-        world->randomlySpawnApple();
     }
 }
 
