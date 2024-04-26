@@ -50,6 +50,9 @@ void Snake::move(Input input) {
     // Add the next head position to the body parts
     parts.push_front(nextHead);
 
+    // Remove energy
+    energy -= 1;
+
     // If the snake did not just grow then we remove its tail
     if (justGrew) {
         justGrew = false;
@@ -60,4 +63,13 @@ void Snake::move(Input input) {
 
 void Snake::grow() {
     justGrew = true;
+    energy += (worldWidth + worldHeight) / 2;
+}
+
+const int *Snake::getEnergy() {
+    return energy.getValue();
+}
+
+bool Snake::hasEnergyLeft() {
+    return energy.hasEnergyLeft();
 }

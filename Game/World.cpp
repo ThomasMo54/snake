@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "GameObject/Snake.hpp"
+#include "GameObject/Snake/Snake.hpp"
 
 #include <random>
 

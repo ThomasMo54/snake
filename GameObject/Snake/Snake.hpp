@@ -3,8 +3,9 @@
 
 #include <queue>
 #include <iterator>
-#include "GameObject.hpp"
+#include "GameObject/GameObject.hpp"
 #include "Input/Input.hpp"
+#include "Energy.hpp"
 
 /**
  * The snake object. Handles moving and growing.
@@ -15,7 +16,7 @@ public:
      * Create a snake giving its head's position.
      * @param position the head's position
      */
-    explicit Snake(const Vector2i &position): GameObject(position) {
+    explicit Snake(const Vector2i &position): GameObject(position), energy(Energy(DEFAULT_ENERGY)) {
         currentDirection = Vector2i(1, 0);
         justGrew = false;
         initialize();
@@ -50,13 +51,23 @@ public:
      */
     void grow();
 
+    const int* getEnergy();
+
+    /**
+     * Check if the snake has energy left.
+     * @return true if it has energy, false otherwise
+     */
+    bool hasEnergyLeft();
+
 private:
     static const int DEFAULT_SIZE = 3;
+    static const int DEFAULT_ENERGY = 40;
 
     int worldWidth, worldHeight;
     Vector2i currentDirection;
     std::deque<Vector2i> parts;
     bool justGrew;
+    Energy energy;
 
     void initialize();
 };

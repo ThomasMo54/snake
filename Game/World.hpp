@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 #include "Math/Vector2i.hpp"
-#include "GameObject/Snake.hpp"
+#include "GameObject/Snake/Snake.hpp"
 #include "GameObject/Apple.hpp"
 #include "GameObject/Obstacles.hpp"
 

@@ -17,7 +17,7 @@ public:
      * @param prefix the prefix
      * @param score the score
      */
-    explicit ScoreText(const Vector2i &position, std::string prefix, int* score):
+    explicit ScoreText(const Vector2i &position, std::string prefix, const int* score):
         Text(position), prefix(std::move(prefix)), score(score) {};
 
     std::string get() const override {
@@ -28,7 +28,7 @@ public:
 
 private:
     std::string prefix;
-    int* score;
+    const int* score;
 };
 
 #endif //SNAKE_SCORETEXT_HPP

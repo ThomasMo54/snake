@@ -5,7 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <list>
 #include "GraphicalInterface.hpp"
-#include "GameObject/Snake.hpp"
+#include "GameObject/Snake/Snake.hpp"
 #include "GameObject/Apple.hpp"
 #include "GameObject/Obstacle.hpp"
 #include "GraphicalInterface/Drawer/SDLObjectDrawer.hpp"

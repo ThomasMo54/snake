@@ -28,13 +28,15 @@ Game::Game(std::unique_ptr<GraphicalInterface> &gui) {
 
     // Create texts
     ScoreText applesEatenText(Vector2i(0, 0), "Pommes: ", &applesEaten);
-    ScoreText stepsText(Vector2i(0, 40), "Pas: ", &steps);
-    ScoreText scoreText(Vector2i(0, 80), "Score: ", &score);
+    ScoreText stepsText(Vector2i(0, 20), "Pas: ", &steps);
+    ScoreText scoreText(Vector2i(0, 40), "Score: ", &score);
+    ScoreText energyText(Vector2i(650, 0), "Energie: ", snake->getEnergy());
 
     // Add objects to the GUI
-    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(applesEatenText), "Font/OpenSans.ttf", 24, Color(255, 255, 255, 255)));
-    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(stepsText), "Font/OpenSans.ttf", 24, Color(255, 255, 255, 255)));
-    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(scoreText), "Font/OpenSans.ttf", 24, Color(255, 255, 255, 255)));
+    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(applesEatenText), "Font/OpenSans.ttf", 20, Color(255, 255, 255, 255)));
+    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(stepsText), "Font/OpenSans.ttf", 20, Color(255, 255, 255, 255)));
+    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(scoreText), "Font/OpenSans.ttf", 20, Color(255, 255, 255, 255)));
+    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(energyText), "Font/OpenSans.ttf", 20, Color(255, 255, 255, 255)));
     this->gui->addObject(new SDLSnakeDrawer(snake));
     this->gui->addObject(new SDLAppleDrawer(apple));
     for (const auto &obstacle : obstacles->getObstacles()) {
@@ -66,6 +68,13 @@ void Game::start() {
             snake->grow();
             world->randomlySpawnApple(*snake, *obstacles, apple);
             applesEaten++;
+        }
+
+        // Check snake energy
+        if (!snake->hasEnergyLeft()) {
+            stop();
+            gui->destroy();
+            return;
         }
 
         steps++;

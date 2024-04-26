@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 #include "SDLObjectDrawer.hpp"
-#include "GameObject/Snake.hpp"
+#include "GameObject/Snake/Snake.hpp"
 
 class SDLSnakeDrawer : public SDLObjectDrawer {
 public:

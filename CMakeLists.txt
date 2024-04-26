@@ -11,7 +11,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_
 add_executable(snake main.cpp
         Math/Vector2i.hpp
         GameObject/GameObject.hpp
-        GameObject/Snake.hpp
+        GameObject/Snake/Snake.hpp
         GameObject/Apple.hpp
         GameObject/Obstacle.hpp
         GraphicalInterface/GraphicalInterface.hpp
@@ -20,7 +20,7 @@ add_executable(snake main.cpp
         Exception/SDLException.hpp
         Game/Game.cpp
         GraphicalInterface/SDLGraphicalInterface.cpp
-        GameObject/Snake.cpp
+        GameObject/Snake/Snake.cpp
         Input/InputManager.hpp
         Input/SDLInputManager.hpp
         GraphicalInterface/Drawer/ObjectDrawer.hpp
@@ -41,5 +41,6 @@ add_executable(snake main.cpp
         GameObject/Text/ScoreText.hpp
         GraphicalInterface/Drawer/SDLTextDrawer.cpp
         GraphicalInterface/Color.hpp
+        GameObject/Snake/Energy.hpp
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
