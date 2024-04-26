@@ -3,6 +3,8 @@
 #include "GraphicalInterface/Drawer/SDLAppleDrawer.hpp"
 #include "GraphicalInterface/Drawer/SDLObstacleDrawer.hpp"
 #include "GraphicalInterface/Drawer/SDLSnakeDrawer.hpp"
+#include "GraphicalInterface/Drawer/SDLTextDrawer.hpp"
+#include "GameObject/Text/ScoreText.hpp"
 
 Game::Game(std::unique_ptr<GraphicalInterface> &gui) {
     applesEaten = 0;
@@ -24,7 +26,15 @@ Game::Game(std::unique_ptr<GraphicalInterface> &gui) {
     // Spawn apple randomly
     world->randomlySpawnApple(*snake, *obstacles, apple);
 
+    // Create texts
+    ScoreText applesEatenText(Vector2i(0, 0), "Pommes: ", &applesEaten);
+    ScoreText stepsText(Vector2i(0, 40), "Pas: ", &steps);
+    ScoreText scoreText(Vector2i(0, 80), "Score: ", &score);
+
     // Add objects to the GUI
+    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(applesEatenText), "Font/OpenSans.ttf", 24, Color(255, 255, 255, 255)));
+    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(stepsText), "Font/OpenSans.ttf", 24, Color(255, 255, 255, 255)));
+    this->gui->addObject(new SDLTextDrawer(std::make_shared<ScoreText>(scoreText), "Font/OpenSans.ttf", 24, Color(255, 255, 255, 255)));
     this->gui->addObject(new SDLSnakeDrawer(snake));
     this->gui->addObject(new SDLAppleDrawer(apple));
     for (const auto &obstacle : obstacles->getObstacles()) {
@@ -59,6 +69,7 @@ void Game::start() {
         }
 
         steps++;
+        score = steps + 50 * applesEaten;
 
         // Update screen
         gui->drawObjects();

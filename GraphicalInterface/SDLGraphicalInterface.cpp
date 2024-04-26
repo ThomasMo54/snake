@@ -1,10 +1,13 @@
 #include "SDLGraphicalInterface.hpp"
 #include "Exception/SDLException.hpp"
-#include "Math/Vector2i.hpp"
 
 SDLGraphicalInterface::SDLGraphicalInterface() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         throw SDLException(SDL_GetError());
+    }
+
+    if (TTF_Init() != 0) {
+        throw SDLException(TTF_GetError());
     }
 
     window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 400, 0);

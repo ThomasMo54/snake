@@ -2,6 +2,7 @@
 #define SNAKE_SDLGRAPHICALINTERFACE_HPP
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <list>
 #include "GraphicalInterface.hpp"
 #include "GameObject/Snake.hpp"

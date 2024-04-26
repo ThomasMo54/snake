@@ -34,6 +34,7 @@ private:
 
     int applesEaten;
     int steps;
+    int score;
     bool running;
     std::unique_ptr<InputManager> inputManager;
     std::unique_ptr<GraphicalInterface> gui;
