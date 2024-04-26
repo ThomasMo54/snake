@@ -6,7 +6,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
+find_package(SDL2_net REQUIRED)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${SDL2_NET_INCLUDE_DIRS})
 
 add_executable(snake main.cpp
         Math/Vector2i.hpp
@@ -43,4 +44,4 @@ add_executable(snake main.cpp
         GraphicalInterface/Color.hpp
         GameObject/Snake/Energy.hpp
 )
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_NET_LIBRARIES})
