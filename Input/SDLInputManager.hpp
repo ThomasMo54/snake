@@ -19,6 +19,9 @@ public:
         if (isKeyDown(SDL_SCANCODE_DOWN)) {
             return Input::DOWN;
         }
+        if (isKeyDown(SDL_SCANCODE_SPACE)) {
+            return Input::SPACE;
+        }
         return Input::VOID;
     }
 

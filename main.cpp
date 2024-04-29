@@ -5,8 +5,8 @@
 
 int main() {
     try {
-        std::unique_ptr<GraphicalInterface> gui;
-        gui = std::make_unique<SDLGraphicalInterface>(SDLGraphicalInterface());
+        std::shared_ptr<GraphicalInterface> gui;
+        gui = std::make_shared<SDLGraphicalInterface>(SDLGraphicalInterface());
         Game game(gui);
         game.start();
     } catch (SDLException &ex) {

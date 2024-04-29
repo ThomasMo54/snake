@@ -21,6 +21,8 @@ public:
         return height;
     }
 
+    void randomlySpawnObstacles(const Snake& snake, std::shared_ptr<Obstacles>& obstacles, int amount);
+
     /**
      * Spawn an apple at a random free position in the world
      */

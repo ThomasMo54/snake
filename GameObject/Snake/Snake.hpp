@@ -12,14 +12,16 @@
  */
 class Snake : public GameObject {
 public:
+    static const int DEFAULT_SIZE = 3;
+
     /**
      * Create a snake giving its head's position.
      * @param position the head's position
      */
-    explicit Snake(const Vector2i &position): GameObject(position), energy(Energy(DEFAULT_ENERGY)) {
+    explicit Snake(const Vector2i &position, int size): GameObject(position), energy(Energy(DEFAULT_ENERGY)) {
         currentDirection = Vector2i(1, 0);
         justGrew = false;
-        initialize();
+        initialize(size);
     }
 
     inline void setWorldSize(int width, int height) {
@@ -60,7 +62,6 @@ public:
     bool hasEnergyLeft();
 
 private:
-    static const int DEFAULT_SIZE = 3;
     static const int DEFAULT_ENERGY = 40;
 
     int worldWidth, worldHeight;
@@ -69,7 +70,7 @@ private:
     bool justGrew;
     Energy energy;
 
-    void initialize();
+    void initialize(int size);
 };
 
 #endif //SNAKE_SNAKE_HPP

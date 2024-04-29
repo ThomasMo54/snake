@@ -63,3 +63,10 @@ void SDLGraphicalInterface::addObject(ObjectDrawer *objectDrawer) {
     sdlObjectDrawer->setRenderer(renderer);
     objects.push_front(sdlObjectDrawer);
 }
+
+void SDLGraphicalInterface::clearObjects() {
+    for (auto & object : objects) {
+        delete object;
+    }
+    objects.clear();
+}

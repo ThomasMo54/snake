@@ -24,6 +24,18 @@ std::vector<Vector2i> World::getFreePositions(const Snake& snake, const Obstacle
     return freePositions;
 }
 
+void World::randomlySpawnObstacles(const Snake& snake, std::shared_ptr<Obstacles>& obstacles, int amount) {
+    for (int i = 0; i < amount; i++) {
+        std::vector<Vector2i> freePositions = getFreePositions(snake, *obstacles);
+
+        // Select a random free position
+        std::uniform_int_distribution<std::mt19937::result_type> dist6(0, freePositions.size() - 1);
+        unsigned long positionIndex = dist6(rng);
+        Vector2i position = freePositions[positionIndex];
+        obstacles->addObstacle(Obstacle(position));
+    }
+}
+
 void World::randomlySpawnApple(const Snake& snake, const Obstacles& obstacles, std::shared_ptr<Apple>& apple) {
     std::vector<Vector2i> freePositions = getFreePositions(snake, obstacles);
 

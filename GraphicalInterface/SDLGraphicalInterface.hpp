@@ -22,6 +22,8 @@ public:
 
     void addObject(ObjectDrawer *objectDrawer) override;
 
+    void clearObjects() override;
+
 private:
     SDL_Window *window;
     SDL_Renderer *renderer;

@@ -43,5 +43,11 @@ add_executable(snake main.cpp
         GraphicalInterface/Drawer/SDLTextDrawer.cpp
         GraphicalInterface/Color.hpp
         GameObject/Snake/Energy.hpp
+        Game/State/State.hpp
+        Game/State/MenuState.hpp
+        Game/State/MenuState.cpp
+        GameObject/Text/SimpleText.hpp
+        Game/State/LevelState.hpp
+        Game/State/LevelState.cpp
 )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_NET_LIBRARIES})

@@ -1,12 +1,12 @@
 #include "Snake.hpp"
 
-void Snake::initialize() {
+void Snake::initialize(int size) {
     // The position of the tail
-    Vector2i tailPosition = position - currentDirection * DEFAULT_SIZE;
+    Vector2i tailPosition = position - currentDirection * size;
 
     // Add all snake's body parts starting from its tail
     parts.push_front(tailPosition);
-    for (int i = 0; i < DEFAULT_SIZE - 1; i++) {
+    for (int i = 0; i < size - 1; i++) {
         parts.push_front(parts.front() + currentDirection);
     }
 }

@@ -29,6 +29,11 @@ public:
     virtual void addObject(ObjectDrawer *objectDrawer) = 0;
 
     /**
+     * Remove all objects to draw.
+     */
+    virtual void clearObjects() = 0;
+
+    /**
      * Destroy the screen.
      */
     virtual void destroy() = 0;

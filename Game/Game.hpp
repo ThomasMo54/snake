@@ -7,6 +7,7 @@
 #include "Input/InputManager.hpp"
 #include "GraphicalInterface/GraphicalInterface.hpp"
 #include "World.hpp"
+#include "Game/State/State.hpp"
 
 class Game {
 public:
@@ -16,7 +17,7 @@ public:
      * Create a new game by giving the graphical interface that will be used
      * @param gui the graphical interface
      */
-    explicit Game(std::unique_ptr<GraphicalInterface> &gui);
+    explicit Game(std::shared_ptr<GraphicalInterface> &gui);
 
     /**
      * Start the game
@@ -29,19 +30,12 @@ public:
     void stop();
 
 private:
-    static const int WORLD_WIDTH = 40;
-    static const int WORLD_HEIGHT = 20;
-
-    int applesEaten;
-    int steps;
-    int score;
     bool running;
     std::unique_ptr<InputManager> inputManager;
-    std::unique_ptr<GraphicalInterface> gui;
-    std::shared_ptr<World> world;
-    std::shared_ptr<Snake> snake;
-    std::shared_ptr<Apple> apple;
-    std::shared_ptr<Obstacles> obstacles;
+    std::shared_ptr<GraphicalInterface> gui;
+    std::shared_ptr<State> state;
+
+    void setState(std::shared_ptr<State> state);
 };
 
 #endif //SNAKE_GAME_HPP
